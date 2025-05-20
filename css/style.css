@@ -1,0 +1,348 @@
+/* === Global Resets and Base Styles === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #F8F9FA; /* Very light gray page background */
+    color: #212529; /* Dark text */
+    line-height: 1.5;
+    transition: padding-top 0.3s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* === Controls Bar (Formal Theme) === */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #E9ECEF;
+    color: #212529;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    overflow: hidden;
+    border-bottom: 1px solid #DEE2E6;
+}
+
+.controls-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.controls-title {
+    font-weight: 600;
+    font-size: 1.05em;
+    color: #343A40;
+}
+
+#toggleControlsBtn {
+    padding: 5px 10px;
+    font-size: 0.85em;
+    cursor: pointer;
+    background-color: #6C757D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+}
+#toggleControlsBtn:hover {
+    background-color: #5A6268;
+}
+
+.controls > div:not(.controls-header) {
+    padding: 8px 10px;
+    background-color: transparent;
+    border: 1px solid #D6D8DB;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.controls.collapsed > div:not(.controls-header) {
+    display: none;
+}
+.controls.collapsed .controls-header {
+    margin-bottom: 0;
+}
+
+.controls label {
+    font-size: 0.875em;
+    margin-right: 5px;
+    color: #495057;
+}
+
+.controls input[type="text"],
+.controls input[type="number"],
+.controls input[type="date"],
+.controls select {
+    font-size: 0.875em;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #CED4DA;
+    border-radius: 0.2rem;
+    background-color: #FFFFFF;
+    color: #495057;
+    line-height: 1.5;
+}
+.controls input[type="text"]:focus,
+.controls input[type="number"]:focus,
+.controls input[type="date"]:focus,
+.controls select:focus {
+    outline: none;
+    border-color: #80BDFF;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.controls button:not(#toggleControlsBtn) {
+    font-size: 0.875em;
+    padding: 0.375rem 0.75rem;
+    background-color: #6C757D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.controls button:not(#toggleControlsBtn):hover {
+    background-color: #5A6268;
+}
+.controls button#addNurseBtn, .controls button#generateScheduleBtn {
+    background-color: #007BFF;
+}
+.controls button#addNurseBtn:hover, .controls button#generateScheduleBtn:hover {
+    background-color: #0056b3;
+}
+
+.controls h3, .controls h4 {
+    font-size: 0.95em;
+    margin: 5px 0;
+    width: 100%;
+    color: #343A40;
+    font-weight: 600;
+}
+.holiday-management-section ul {
+    padding-left: 0;
+    list-style: none;
+    margin: 5px 0;
+    font-size: 0.875em;
+    width: 100%;
+}
+.holiday-management-section li {
+    padding: 3px 0;
+    color: #495057;
+}
+.holiday-management-section li button {
+    font-size: 0.75em;
+    padding: 2px 5px;
+    margin-left: 8px;
+    background-color: #fd7e14;
+    color: #FFFFFF;
+}
+.holiday-management-section li button:hover {
+    background-color: #e6690b;
+}
+
+.department-ot-limit-section .ot-summary {
+    font-size: 0.8em;
+    margin-left: 8px;
+    color: #495057;
+}
+
+/* === Main Content === */
+.main-content-wrapper {
+    padding: 20px;
+    background-color: #FFFFFF;
+    margin: 15px;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+
+.main-content-wrapper h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.75rem;
+    color: #343A40;
+    text-align: center;
+    font-weight: 500;
+}
+
+#scheduleTableContainer {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 180px); /* ปรับค่านี้ตามความสูงจริงของส่วนที่อยู่เหนือตาราง */
+    border: 1px solid #DEE2E6;
+    border-radius: 0.25rem;
+}
+
+/* === Table Styling (Enhanced Clarity) === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+/* General Cell Styling (th, td) - Borders are key for clarity */
+th, td {
+    border: 1px solid #CED4DA; /* Slightly more visible border for all cells */
+    padding: 0.6rem 0.75rem; /* Consistent padding */
+    font-size: 0.875em;
+    vertical-align: middle; /* Align content vertically in the middle */
+}
+
+/* Sticky Table Elements (General) - Ensure these are opaque */
+thead th,
+thead td {
+    position: sticky;
+    top: 0;
+    color: #212529;
+    white-space: nowrap; /* Ensure all header texts are on one line */
+    border-bottom-width: 2px; /* Stronger bottom border for header cells */
+    /* border-left, border-right, border-top will come from the general th, td rule */
+}
+
+/* First Header Row (Dates) */
+thead tr:first-child th {
+    background-color: #E9ECEF; /* Darker Gray for primary header row */
+    font-weight: 600;
+    z-index: 2; /* Base for header rows */
+}
+
+/* Second Header Row (Daily Summary) */
+thead tr:nth-child(2) td {
+    background-color: #F8F9FA; /* Lighter Gray for secondary header row */
+    font-weight: normal; /* Normal weight for summary data titles if not the first cell */
+    z-index: 2;
+}
+
+/* Top-Left Corner Header ("ชื่อพยาบาล") */
+thead tr:first-child th:first-child {
+    left: 0;
+    background-color: #DEE2E6; /* Darkest of the light grays for this corner */
+    z-index: 4; /* Highest for table sticky elements */
+    text-align: left;
+    min-width: 220px;
+    font-weight: 600;
+}
+
+/* "สรุปเวรรายวัน" Title Cell (Sticky Left, under Nurse Name header) */
+thead tr:nth-child(2) td:first-child {
+    left: 0;
+    background-color: #E9ECEF; /* Match its row or slightly distinct */
+    z-index: 3;
+    text-align: left;
+    font-weight: 600; /* Bold as it's a title */
+}
+
+/* Nurse Name Data Cells (Sticky Left in tbody) */
+tbody td:first-child {
+    position: sticky;
+    left: 0;
+    /* background-color will be handled by zebra striping or default to white */
+    color: #212529;
+    z-index: 1;
+    text-align: left;
+    white-space: nowrap;
+    min-width: 220px;
+    font-weight: normal;
+    border-right-width: 1px; /* Ensure right border is visible */
+}
+
+/* Zebra Striping for tbody rows for better readability */
+tbody tr:nth-child(odd) td {
+    background-color: #FFFFFF; /* White for odd rows */
+}
+tbody tr:nth-child(even) td {
+    background-color: #F8F9FA; /* Very light gray for even rows */
+}
+/* Ensure sticky first child in even/odd rows also gets this background for opacity */
+tbody tr:nth-child(odd) td:first-child {
+    background-color: #FFFFFF;
+}
+tbody tr:nth-child(even) td:first-child {
+    background-color: #F8F9FA;
+}
+
+
+/* Cells other than the first (nurse name) column */
+td:not(:first-child),
+th:not(:first-child) {
+    text-align: center;
+    min-width: 80px; /* Wider columns */
+    white-space: nowrap; /* Keep content like dates/summaries on one line */
+}
+
+/* Shift Input in Table */
+.shift-input {
+    width: 100%;
+    max-width: 120px;
+    border: 1px solid #CED4DA;
+    border-radius: 0.2rem;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 0.875em;
+    background-color: #FFFFFF;
+}
+.shift-input:focus {
+    outline: none;
+    border-color: #80BDFF;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Summary Column in Table */
+.summary-col {
+    /* background-color: #E9ECEF; /* Matches controls bar / darker header for emphasis */
+    font-weight: 600;
+    color: #212529;
+    white-space: nowrap;
+    text-align: center;
+}
+/* Zebra striping for summary columns - ensure it overrides general tbody zebra if needed, or blends */
+tbody tr:nth-child(odd) td.summary-col {
+    background-color: #F0F2F5; /* Slightly different from white for odd rows */
+}
+tbody tr:nth-child(even) td.summary-col {
+    background-color: #E9ECEF; /* Slightly different from light gray for even rows */
+}
+
+
+.holiday {
+    background-color: #83dee8 !important; /* Bootstrap info light blue */
+    color: #000000 !important;
+    font-weight: bold;
+}
+
+.weekend {
+    /* background-color: #F8F9FA !important; /* Subtle, or remove for more white space */
+    color: #000000; /* Slightly muted text for weekends if no distinct background */
+    background-color: #83e8cb !important; /* Bootstrap info light blue */
+}
+
+/* Style for the delete nurse button in the table */
+.delete-nurse-btn {
+    margin-left: 10px;
+    padding: 3px 8px;
+    font-size: 0.8em;
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    vertical-align: middle;
+}
+.delete-nurse-btn:hover {
+    background-color: #C82333;
+}
