@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table.nurse</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="controls" id="controlsBar">
+        <div class="controls-header">
+            <span class="controls-title">เครื่องมือจัดการตาราง</span>
+            <button id="toggleControlsBtn" aria-label="ย่อ/ขยายแถบเครื่องมือ" title="ย่อ/ขยายแถบเครื่องมือ">ย่อ</button>
+        </div>
+
+        <div class="add-nurse-section">
+            <input type="text" id="newNurseName" placeholder="ชื่อพยาบาล">
+            <button id="addNurseBtn">เพิ่มพยาบาล</button>
+        </div>
+        <div class="month-year-selector">
+            <label for="monthSelect">เดือน:</label>
+            <select id="monthSelect"></select>
+            <label for="yearSelect">ปี:</label>
+            <input type="number" id="yearSelect" value="2025"> <button id="generateScheduleBtn">สร้างตาราง</button>
+        </div>
+        <div class="department-ot-limit-section">
+            <label for="departmentOTLimit">OT รวมแผนก (เวร):</label>
+            <input type="number" id="departmentOTLimit" value="100">
+            <span class="ot-summary">(จ่ายไปแล้ว: <span id="totalAssignedOTDisplay">0</span> เวร)</span>
+        </div>
+        <div class="holiday-management-section">
+            <h3>จัดการวันหยุด</h3>
+            <label for="holidayDate">เลือกวันที่หยุด:</label>
+            <input type="date" id="holidayDate">
+            <button id="addHolidayBtn">เพิ่มวันหยุด</button>
+            <h4>วันหยุดที่กำหนด:</h4>
+            <ul id="customHolidaysList"></ul>
+        </div>
+        <div class="export-section">
+            <h3>ดาวน์โหลด</h3>
+            <button id="downloadCsvBtn">CSV (Excel)</button>
+        </div>
+    </div>
+
+    <div class="main-content-wrapper"> <h1>ตารางเวรพยาบาล</h1>
+        <div id="scheduleTableContainer">
+            </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
