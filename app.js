@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tbody = document.createElement('tbody');
 
         const headerRow1 = document.createElement('tr');
-        headerRow1.appendChild(document.createElement('th')).textContent = 'ชื่อพยาบาล';
+        headerRow1.appendChild(document.createElement('th')).textContent = 'วันที่';
         for (let day = 1; day <= daysInMonth; day++) {
             const th = document.createElement('th');
             th.textContent = day.toString();
