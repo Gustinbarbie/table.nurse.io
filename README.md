@@ -1,1 +1,1 @@
-# table.nurse.io
+# table.nurse
