@@ -1,0 +1,314 @@
+/* === Global Resets and Base Styles === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #F8F9FA;
+    color: #212529;
+    line-height: 1.5;
+    transition: padding-top 0.3s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* === Controls Bar === */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #E9ECEF;
+    color: #212529;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    overflow: hidden;
+    border-bottom: 1px solid #DEE2E6;
+}
+
+.controls-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.controls-title {
+    font-weight: 600;
+    font-size: 1.05em;
+    color: #343A40;
+}
+
+#toggleControlsBtn {
+    padding: 5px 10px;
+    font-size: 0.85em;
+    cursor: pointer;
+    background-color: #6C757D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+}
+#toggleControlsBtn:hover {
+    background-color: #5A6268;
+}
+
+.controls > div:not(.controls-header) {
+    padding: 8px 10px;
+    background-color: transparent;
+    border: 1px solid #D6D8DB;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.controls.collapsed > div:not(.controls-header) {
+    display: none;
+}
+.controls.collapsed .controls-header {
+    margin-bottom: 0;
+}
+
+.controls label {
+    font-size: 0.875em;
+    margin-right: 5px;
+    color: #495057;
+}
+
+.controls input[type="text"],
+.controls input[type="number"],
+.controls input[type="date"],
+.controls select {
+    font-size: 0.875em;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #CED4DA;
+    border-radius: 0.2rem;
+    background-color: #FFFFFF;
+    color: #495057;
+    line-height: 1.5;
+}
+.controls input[type="text"]:focus,
+.controls input[type="number"]:focus,
+.controls input[type="date"]:focus,
+.controls select:focus {
+    outline: none;
+    border-color: #80BDFF;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.controls button:not(#toggleControlsBtn) {
+    font-size: 0.875em;
+    padding: 0.375rem 0.75rem;
+    background-color: #6C757D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.controls button:not(#toggleControlsBtn):hover {
+    background-color: #5A6268;
+}
+.controls button#addNurseBtn, .controls button#generateScheduleBtn {
+    background-color: #007BFF;
+}
+.controls button#addNurseBtn:hover, .controls button#generateScheduleBtn:hover {
+    background-color: #0056b3;
+}
+
+.controls h3, .controls h4 {
+    font-size: 0.95em;
+    margin: 5px 0;
+    width: 100%;
+    color: #343A40;
+    font-weight: 600;
+}
+.holiday-management-section ul {
+    padding-left: 0; list-style: none; margin: 5px 0; font-size: 0.875em; width: 100%;
+}
+.holiday-management-section li {
+    padding: 3px 0; color: #495057;
+}
+.holiday-management-section li button {
+    font-size: 0.75em; padding: 2px 5px; margin-left: 8px; background-color: #fd7e14; color: #FFFFFF;
+}
+.holiday-management-section li button:hover {
+    background-color: #e6690b;
+}
+.department-ot-limit-section .ot-summary {
+    font-size: 0.8em; margin-left: 8px; color: #495057;
+}
+
+/* === Main Content === */
+.main-content-wrapper {
+    padding: 20px; background-color: #FFFFFF; margin: 15px;
+    border-radius: 0.25rem; box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+.main-content-wrapper h1 {
+    margin-top: 0; margin-bottom: 20px; font-size: 1.75rem; color: #343A40;
+    text-align: center; font-weight: 500;
+}
+#scheduleTableContainer {
+    overflow-x: auto; overflow-y: auto;
+    max-height: calc(100vh - 180px); /* Adjust based on actual content above */
+    border: 1px solid #DEE2E6; border-radius: 0.25rem;
+}
+
+/* === Table Styling === */
+table { width: 100%; border-collapse: collapse; table-layout: auto; }
+th, td {
+    border: 1px solid #CED4DA; padding: 0.6rem 0.75rem;
+    font-size: 0.875em; vertical-align: middle;
+}
+thead th, thead td {
+    position: sticky; top: 0; color: #212529;
+    white-space: nowrap; border-bottom-width: 2px;
+}
+thead tr:first-child th {
+    background-color: #E9ECEF; font-weight: 600; z-index: 2;
+}
+thead tr:nth-child(2) td {
+    background-color: #F8F9FA; font-weight: normal; z-index: 2;
+}
+thead tr:first-child th:first-child { /* Top-Left "Nurse Name" header */
+    left: 0; background-color: #DEE2E6; z-index: 4;
+    text-align: left; min-width: 150px; font-weight: 600; white-space: nowrap;
+}
+thead tr:nth-child(2) td:first-child { /* "Daily Summary" title cell */
+    left: 0; background-color: #E9ECEF; z-index: 3;
+    text-align: left; font-weight: 600; min-width: 150px; white-space: nowrap;
+}
+tbody td:first-child { /* Nurse name data cells */
+    position: sticky; left: 0; color: #212529; z-index: 1;
+    text-align: left; min-width: 150px; font-weight: normal;
+    border-right-width: 1px; white-space: nowrap;
+}
+tbody tr:nth-child(odd) td { background-color: #FFFFFF; }
+tbody tr:nth-child(even) td { background-color: #F8F9FA; }
+tbody tr:nth-child(odd) td:first-child { background-color: #FFFFFF; } 
+tbody tr:nth-child(even) td:first-child { background-color: #F8F9FA; } 
+
+/* Data cells (dates/shifts) & non-summary headers */
+td:not(:first-child):not(.summary-col),
+th:not(:first-child):not(.summary-col) { 
+    text-align: center; min-width: 90px; white-space: nowrap;
+}
+
+/* Shift Cell Styling (for displaying selected shifts and being clickable) */
+td.shift-cell {
+    cursor: pointer;
+    min-height: 38px; 
+    vertical-align: middle;
+    line-height: 1.4;
+    text-align: center; 
+    position: relative; 
+}
+td.shift-cell:hover {
+    background-color: #e0e6ed !important; 
+}
+.shift-cell-display {
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 0.85em;
+    min-width: 50px; 
+}
+.shift-cell-placeholder, 
+.shift-cell-off { /* Style for "OFF" when no shift is assigned */
+    color: #6C757D; 
+    font-style: italic;
+    font-size: 0.85em; 
+}
+
+.summary-col { 
+    font-weight: 600; color: #212529; white-space: nowrap; 
+    text-align: center; min-width: 50px; 
+    padding-left: 0.4rem; padding-right: 0.4rem;
+}
+tbody tr:nth-child(odd) td.summary-col { background-color: #F0F2F5; }
+tbody tr:nth-child(even) td.summary-col { background-color: #E9ECEF; }
+
+.holiday { background-color: #60ffe4 !important; color: #000000 !important; font-weight: bold; }
+.weekend { background-color: #70fed1 !important; color: #000000 !important; font-weight: bold;  }
+
+.delete-nurse-btn {
+    margin-left: 10px; padding: 3px 8px; font-size: 0.8em;
+    background-color: #DC3545; color: white; border: none;
+    border-radius: 0.2rem; cursor: pointer;
+    transition: background-color 0.2s ease; vertical-align: middle;
+}
+.delete-nurse-btn:hover { background-color: #C82333; }
+
+/* === Popover/Modal Styling === */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.15); 
+    display: none; 
+    z-index: 1999; 
+}
+.modal-content { 
+    position: absolute; 
+    background-color: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    width: auto; 
+    min-width: 280px; 
+    max-width: 350px; 
+    z-index: 2000; 
+    padding: 0; 
+}
+.modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 15px; border-bottom: 1px solid #E0E0E0;
+    background-color: #f7f7f7;
+    border-top-left-radius: 6px; border-top-right-radius: 6px;
+}
+.modal-header h3 {
+    margin: 0; font-size: 1.1rem; color: #333; font-weight: 600;
+}
+.modal-close-btn {
+    background: none; border: none; font-size: 1.4rem; line-height: 1;
+    cursor: pointer; color: #888; padding: 0;
+}
+.modal-close-btn:hover { color: #333; }
+.modal-body {
+    padding: 15px; max-height: 250px; overflow-y: auto;
+}
+.modal-body .shift-option {
+    display: block; margin-bottom: 0.75rem;
+}
+.modal-body .shift-option input[type="checkbox"] {
+    margin-right: 0.5rem; vertical-align: middle;
+    width: 1.1em; height: 1.1em; transform: scale(1.1);
+}
+.modal-body .shift-option label {
+    font-size: 1rem; color: #495057; vertical-align: middle; cursor: pointer;
+}
+.modal-footer {
+    display: flex; justify-content: flex-end; gap: 0.5rem;
+    padding: 10px 15px; border-top: 1px solid #E0E0E0;
+    background-color: #f7f7f7;
+    border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
+}
+.btn-modal {
+    padding: 0.5rem 1rem; font-size: 0.9rem; border-radius: 0.25rem;
+    cursor: pointer; border: 1px solid transparent; line-height: 1.5;
+    font-weight: 400; text-align: center;
+}
+.btn-modal.btn-primary {
+    background-color: #007BFF; color: white; border-color: #007BFF;
+}
+.btn-modal.btn-primary:hover { background-color: #0056b3; border-color: #0052a0; }
+.btn-modal.btn-secondary {
+    background-color: #6C757D; color: white; border-color: #6C757D;
+}
+.btn-modal.btn-secondary:hover { background-color: #5A6268; border-color: #545b62; }
